@@ -623,7 +623,7 @@ class Board{
                 var posX = this.blackPieces[i].matrixPosition.x;
                 var posY = this.blackPieces[i].matrixPosition.y;
                 if(this.pieceAt(posX-1,posY-1) & this.boundryCheck(posX-1, posY-1)){
-                    if(!this.getPiece(posX-1, posY-1).isWhite){
+                    if(this.getPiece(posX-1, posY-1).isWhite){
                         this.blackPieces[i].legalMoves.push([posX-1, posY-1]);
                     }
                 }
@@ -634,7 +634,7 @@ class Board{
                 }
 
                 if(this.pieceAt(posX-1,posY) & this.boundryCheck(posX-1, posY)){
-                    if(!this.getPiece(posX-1, posY).isWhite){
+                    if(this.getPiece(posX-1, posY).isWhite){
                         this.blackPieces[i].legalMoves.push([posX-1, posY]);
                     }
                 }
@@ -645,7 +645,7 @@ class Board{
                 }
 
                 if(this.pieceAt(posX-1,posY+1) & this.boundryCheck(posX-1, posY+1)){
-                    if(!this.getPiece(posX-1, posY+1).isWhite){
+                    if(this.getPiece(posX-1, posY+1).isWhite){
                         this.blackPieces[i].legalMoves.push([posX-1, posY+1]);
                     }
                 }
@@ -656,7 +656,7 @@ class Board{
                 }
 
                 if(this.pieceAt(posX,posY-1) & this.boundryCheck(posX, posY-1)){
-                    if(!this.getPiece(posX, posY-1).isWhite){
+                    if(this.getPiece(posX, posY-1).isWhite){
                         this.blackPieces[i].legalMoves.push([posX, posY-1]);
                     }
                 }
@@ -667,7 +667,7 @@ class Board{
                 }
 
                 if(this.pieceAt(posX,posY+1) & this.boundryCheck(posX, posY+1)){
-                    if(!this.getPiece(posX, posY+1).isWhite){
+                    if(this.getPiece(posX, posY+1).isWhite){
                         this.blackPieces[i].legalMoves.push([posX, posY+1]);
                     }
                 }
@@ -678,7 +678,7 @@ class Board{
                 }
 
                 if(this.pieceAt(posX+1,posY-1) & this.boundryCheck(posX+1, posY-1)){
-                    if(!this.getPiece(posX+1, posY-1).isWhite){
+                    if(this.getPiece(posX+1, posY-1).isWhite){
                         this.blackPieces[i].legalMoves.push([posX+1, posY-1]);
                     }
                 }
@@ -689,7 +689,7 @@ class Board{
                 }
 
                 if(this.pieceAt(posX+1,posY) & this.boundryCheck(posX+1, posY)){
-                    if(!this.getPiece(posX+1, posY).isWhite){
+                    if(this.getPiece(posX+1, posY).isWhite){
                         this.blackPieces[i].legalMoves.push([posX+1, posY]);
                     }
                 }
@@ -700,7 +700,7 @@ class Board{
                 }
 
                 if(this.pieceAt(posX+1,posY+1) & this.boundryCheck(posX+1, posY+1)){
-                    if(!this.getPiece(posX+1, posY+1).isWhite){
+                    if(this.getPiece(posX+1, posY+1).isWhite){
                         this.blackPieces[i].legalMoves.push([posX+1, posY+1]);
                     }
                 }

@@ -80,7 +80,7 @@ function mouseClicked(){
         test.updateIfWhiteKingInCheck();
         test.updateIfBlackKingInCheck();
         //currentTurnOfWhite = !currentTurnOfWhite;
-        //console.log(test.isBlackKingInCheck);
+        console.log(test.isBlackKingInCheck);
 
 
         test.updateLegalMoves();
@@ -89,7 +89,7 @@ function mouseClicked(){
         test.updateIfWhiteKingInCheck();
         test.updateIfBlackKingInCheck();
 
-        //console.log(test.isBlackKingInCheck);
+        console.log(test.isBlackKingInCheck);
 
         //currentTurnOfWhite = !currentTurnOfWhite;
       }
@@ -117,13 +117,13 @@ function mouseClicked(){
         test.updateIfWhiteKingInCheck();
         test.updateIfBlackKingInCheck();
 
-        //console.log(test.isBlackKingInCheck);
+        console.log(test.isBlackKingInCheck);
 
         computerMakeMove(test, movingPiece.isWhite);
         test.updateIfWhiteKingInCheck();
         test.updateIfBlackKingInCheck();
 
-        //console.log(test.isBlackKingInCheck);
+        console.log(test.isBlackKingInCheck);
         //currentTurnOfWhite = !currentTurnOfWhite;
       }
     }
