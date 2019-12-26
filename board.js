@@ -38,18 +38,18 @@ class Board{
 
 
         this.blackPieces.push(new King(4,0,false));
-        //this.blackPieces.push(new Bishop(2,0,false));
-        //this.blackPieces.push(new Bishop(5,0,false));
-        //this.blackPieces.push(new Rook(0,0,false));
-        //this.blackPieces.push(new Rook(7,0,false));
-        //this.blackPieces.push(new Queen(3,0,false));
-        //this.blackPieces.push(new Knight(1,0,false));
-        //this.blackPieces.push(new Knight(6,0,false));
+        this.blackPieces.push(new Bishop(2,0,false));
+        this.blackPieces.push(new Bishop(5,0,false));
+        this.blackPieces.push(new Rook(0,0,false));
+        this.blackPieces.push(new Rook(7,0,false));
+        this.blackPieces.push(new Queen(3,0,false));
+        this.blackPieces.push(new Knight(1,0,false));
+        this.blackPieces.push(new Knight(6,0,false));
 
-        //this.blackPieces.push(new Pawn(0,1,false));
-        //this.blackPieces.push(new Pawn(1,1,false));
-        //this.blackPieces.push(new Pawn(2,1,false));
-        //this.blackPieces.push(new Pawn(3,1,false));
+        this.blackPieces.push(new Pawn(0,1,false));
+        this.blackPieces.push(new Pawn(1,1,false));
+        this.blackPieces.push(new Pawn(2,1,false));
+        this.blackPieces.push(new Pawn(3,1,false));
         this.blackPieces.push(new Pawn(4,1,false));
         this.blackPieces.push(new Pawn(5,1,false));
         this.blackPieces.push(new Pawn(6,1,false));
