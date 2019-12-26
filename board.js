@@ -556,7 +556,7 @@ class Board{
                 var tmp = posX-1;
                 while(tmp>=0){
                     if(this.pieceAt(tmp, posY)){
-                        if(!this.getPiece(tmp,posY).isWhite){
+                        if(this.getPiece(tmp,posY).isWhite){
                             break;
                         }
                         this.whitePieces[i].legalMoves.push([tmp,posY]);
@@ -572,7 +572,7 @@ class Board{
 
                 while(tmp<=7){
                     if(this.pieceAt(tmp, posY)){
-                        if(!this.getPiece(tmp,posY).isWhite){
+                        if(this.getPiece(tmp,posY).isWhite){
                             break;
                         }
                         this.whitePieces[i].legalMoves.push([tmp,posY]);
@@ -587,8 +587,8 @@ class Board{
                 tmp = posY-1;
 
                 while(tmp>=0){
-                    if(this.pieceAt(tmp, posY)){
-                        if(!this.getPiece(tmp,posY).isWhite){
+                    if(this.pieceAt(posX, tmp)){
+                        if(this.getPiece(posX, tmp).isWhite){
                             break;
                         }
                         this.whitePieces[i].legalMoves.push([posX,tmp]);
@@ -603,7 +603,7 @@ class Board{
 
                 while(tmp<=7){
                     if(this.pieceAt(posX, tmp)){
-                        if(!this.getPiece(posX,tmp).isWhite){
+                        if(this.getPiece(posX,tmp).isWhite){
                             break;
                         }
                         this.whitePieces[i].legalMoves.push([posX,tmp]);
@@ -615,6 +615,92 @@ class Board{
                     ++tmp;
                 }
                 
+            }
+            if(this.whitePieces[i].letter == "Kn"){
+                var posX = this.whitePieces[i].matrixPosition.x;
+                var posY = this.whitePieces[i].matrixPosition.y;
+                this.whitePieces[i].legalMoves = [];
+                if(this.boundryCheck(posX+2 , posY+1)){
+                    if(this.pieceAt(posX+2, posY+1)){
+                        if(!this.getPiece(posX+2, posY+1).isWhite){
+                            this.whitePieces[i].legalMoves.push([posX+2, posY+1]);
+                        }
+                    }
+                    else{
+                        this.whitePieces[i].legalMoves.push([posX+2, posY+1]);
+                    }
+                }
+                if(this.boundryCheck(posX+2 , posY-1)){
+                    if(this.pieceAt(posX+2, posY-1)){
+                        if(!this.getPiece(posX+2, posY-1).isWhite){
+                            this.whitePieces[i].legalMoves.push([posX+2, posY-1]);
+                        }
+                    }
+                    else{
+                        this.whitePieces[i].legalMoves.push([posX+2, posY-1]);
+                    }
+                }
+                if(this.boundryCheck(posX-2 , posY+1)){
+                    if(this.pieceAt(posX-2, posY+1)){
+                        if(!this.getPiece(posX-2, posY+1).isWhite){
+                            this.whitePieces[i].legalMoves.push([posX-2, posY+1]);
+                        }
+                    }
+                    else{
+                        this.whitePieces[i].legalMoves.push([posX-2, posY+1]);
+                    }
+                }
+                if(this.boundryCheck(posX-2 , posY-1)){
+                    if(this.pieceAt(posX-2, posY-1)){
+                        if(!this.getPiece(posX-2, posY-1).isWhite){
+                            this.whitePieces[i].legalMoves.push([posX-2, posY-1]);
+                        }
+                    }
+                    else{
+                        this.whitePieces[i].legalMoves.push([posX-2, posY-1]);
+                    }
+                }
+                if(this.boundryCheck(posX+1 , posY+2)){
+                    if(this.pieceAt(posX+1, posY+2)){
+                        if(!this.getPiece(posX+1, posY+2).isWhite){
+                            this.whitePieces[i].legalMoves.push([posX+1, posY+2]);
+                        }
+                    }
+                    else{
+                        this.whitePieces[i].legalMoves.push([posX+1, posY+2]);
+                    }
+                }
+                if(this.boundryCheck(posX-1 , posY+2)){
+                    if(this.pieceAt(posX-1, posY+2)){
+                        if(!this.getPiece(posX-1, posY+2).isWhite){
+                            this.whitePieces[i].legalMoves.push([posX-1, posY+2]);
+                        }
+                    }
+                    else{
+                        this.whitePieces[i].legalMoves.push([posX-1, posY+2]);
+                    }
+                }
+                if(this.boundryCheck(posX+1 , posY-2)){
+                    if(this.pieceAt(posX+1, posY-2)){
+                        if(!this.getPiece(posX+1, posY-2).isWhite){
+                            this.whitePieces[i].legalMoves.push([posX+1, posY-2]);
+                        }
+                    }
+                    else{
+                        this.whitePieces[i].legalMoves.push([posX+1, posY-2]);
+                    }
+                }
+                if(this.boundryCheck(posX-1 , posY-2)){
+                    if(this.pieceAt(posX-1, posY-2)){
+                        if(!this.getPiece(posX-1, posY-2).isWhite){
+                            this.whitePieces[i].legalMoves.push([posX-1, posY-2]);
+                        }
+                    }
+                    else{
+                        this.whitePieces[i].legalMoves.push([posX-1, posY-2]);
+                    }
+                    this.whitePieces[i].legalMoves.push([posX-1, posY-2]);
+                }
             }
         }
 
@@ -1003,8 +1089,8 @@ class Board{
                 tmp = posY-1;
 
                 while(tmp>=0){
-                    if(this.pieceAt(tmp, posY)){
-                        if(!this.getPiece(tmp,posY).isWhite){
+                    if(this.pieceAt(posX, tmp)){
+                        if(!this.getPiece(posX,tmp).isWhite){
                             break;
                         }
                         this.blackPieces[i].legalMoves.push([posX,tmp]);
@@ -1029,6 +1115,93 @@ class Board{
                         this.blackPieces[i].legalMoves.push([posX,tmp]);
                     }
                     ++tmp;
+                }
+                
+            }
+            if(this.blackPieces[i].letter == "Kn"){
+                var posX = this.blackPieces[i].matrixPosition.x;
+                var posY = this.blackPieces[i].matrixPosition.y;
+                this.blackPieces[i].legalMoves = [];
+                if(this.boundryCheck(posX+2 , posY+1)){
+                    if(this.pieceAt(posX+2, posY+1)){
+                        if(this.getPiece(posX+2, posY+1).isWhite){
+                            this.blackPieces[i].legalMoves.push([posX+2, posY+1]);
+                        }
+                    }
+                    else{
+                        this.blackPieces[i].legalMoves.push([posX+2, posY+1]);
+                    }
+                }
+                if(this.boundryCheck(posX+2 , posY-1)){
+                    if(this.pieceAt(posX+2, posY-1)){
+                        if(this.getPiece(posX+2, posY-1).isWhite){
+                            this.blackPieces[i].legalMoves.push([posX+2, posY-1]);
+                        }
+                    }
+                    else{
+                        this.blackPieces[i].legalMoves.push([posX+2, posY-1]);
+                    }
+                }
+                if(this.boundryCheck(posX-2 , posY+1)){
+                    if(this.pieceAt(posX-2, posY+1)){
+                        if(this.getPiece(posX-2, posY+1).isWhite){
+                            this.blackPieces[i].legalMoves.push([posX-2, posY+1]);
+                        }
+                    }
+                    else{
+                        this.blackPieces[i].legalMoves.push([posX-2, posY+1]);
+                    }
+                }
+                if(this.boundryCheck(posX-2 , posY-1)){
+                    if(this.pieceAt(posX-2, posY-1)){
+                        if(this.getPiece(posX-2, posY-1).isWhite){
+                            this.blackPieces[i].legalMoves.push([posX-2, posY-1]);
+                        }
+                    }
+                    else{
+                        this.blackPieces[i].legalMoves.push([posX-2, posY-1]);
+                    }
+                }
+                if(this.boundryCheck(posX+1 , posY+2)){
+                    if(this.pieceAt(posX+1, posY+2)){
+                        if(this.getPiece(posX+1, posY+2).isWhite){
+                            this.blackPieces[i].legalMoves.push([posX+1, posY+2]);
+                        }
+                    }
+                    else{
+                        this.blackPieces[i].legalMoves.push([posX+1, posY+2]);
+                    }
+                }
+                if(this.boundryCheck(posX-1 , posY+2)){
+                    if(this.pieceAt(posX-1, posY+2)){
+                        if(this.getPiece(posX-1, posY+2).isWhite){
+                            this.blackPieces[i].legalMoves.push([posX-1, posY+2]);
+                        }
+                    }
+                    else{
+                        this.blackPieces[i].legalMoves.push([posX-1, posY+2]);
+                    }
+                }
+                if(this.boundryCheck(posX+1 , posY-2)){
+                    if(this.pieceAt(posX+1, posY+2)){
+                        if(this.getPiece(posX+1, posY+2).isWhite){
+                            this.blackPieces[i].legalMoves.push([posX+1, posY+2]);
+                        }
+                    }
+                    else{
+                        this.blackPieces[i].legalMoves.push([posX+1, posY+2]);
+                    }
+                }
+                if(this.boundryCheck(posX-1 , posY-2)){
+                    if(this.pieceAt(posX-1, posY-2)){
+                        if(this.getPiece(posX-1, posY-2).isWhite){
+                            this.blackPieces[i].legalMoves.push([posX-1, posY-2]);
+                        }
+                    }
+                    else{
+                        this.blackPieces[i].legalMoves.push([posX-1, posY-2]);
+                    }
+                    this.blackPieces[i].legalMoves.push([posX-1, posY-2]);
                 }
                 
             }

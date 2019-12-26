@@ -298,31 +298,32 @@ class Knight extends Piece{
         this.findlegalMoves();
     }
     findlegalMoves(){
-        if(this.checkRange(this.matrixPosition.x+2 , this.matrixPosition.y+1)){
-            this.legalMoves.push([this.matrixPosition.x+2, this.matrixPosition.y+1]);
+            if(this.checkRange(posX+2 , posY+1)){
+                this.legalMoves.push([posX+2, posY+1]);
+            }
+            if(this.checkRange(posX+2 , posY-1)){
+                this.legalMoves.push([posX+2, posY-1]);
+            }
+            if(this.checkRange(posX-2 , posY+1)){
+                this.legalMoves.push([posX-2, posY+1]);
+            }
+            if(this.checkRange(posX-2 , posY-1)){
+                this.legalMoves.push([posX-2, posY-1]);
+            }
+            if(this.checkRange(posX+1 , posY+2)){
+                this.legalMoves.push([posX+1, posY+2]);
+            }
+            if(this.checkRange(posX-1 , posY+2)){
+                this.legalMoves.push([posX-1, posY+2]);
+            }
+            if(this.checkRange(posX+1 , posY-2)){
+                this.legalMoves.push([posX+1, posY-2]);
+            }
+            if(this.checkRange(posX-1 , posY-2)){
+                this.legalMoves.push([posX-1, posY-2]);
+            }
         }
-        if(this.checkRange(this.matrixPosition.x+2 , this.matrixPosition.y-1)){
-            this.legalMoves.push([this.matrixPosition.x+2, this.matrixPosition.y-1]);
-        }
-        if(this.checkRange(this.matrixPosition.x-2 , this.matrixPosition.y+1)){
-            this.legalMoves.push([this.matrixPosition.x-2, this.matrixPosition.y+1]);
-        }
-        if(this.checkRange(this.matrixPosition.x-2 , this.matrixPosition.y-1)){
-            this.legalMoves.push([this.matrixPosition.x-2, this.matrixPosition.y-1]);
-        }
-        if(this.checkRange(this.matrixPosition.x+1 , this.matrixPosition.y+2)){
-            this.legalMoves.push([this.matrixPosition.x+1, this.matrixPosition.y+2]);
-        }
-        if(this.checkRange(this.matrixPosition.x-1 , this.matrixPosition.y+2)){
-            this.legalMoves.push([this.matrixPosition.x-1, this.matrixPosition.y+2]);
-        }
-        if(this.checkRange(this.matrixPosition.x+1 , this.matrixPosition.y-2)){
-            this.legalMoves.push([this.matrixPosition.x+1, this.matrixPosition.y-2]);
-        }
-        if(this.checkRange(this.matrixPosition.x-1 , this.matrixPosition.y-2)){
-            this.legalMoves.push([this.matrixPosition.x-1, this.matrixPosition.y-2]);
-        }
-    }
+
     returnLetter(){
         return this.letter;
     }
