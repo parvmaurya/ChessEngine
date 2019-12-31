@@ -298,30 +298,30 @@ class Knight extends Piece{
         this.findlegalMoves();
     }
     findlegalMoves(){
-            if(this.checkRange(posX+2 , posY+1)){
-                this.legalMoves.push([posX+2, posY+1]);
-            }
-            if(this.checkRange(posX+2 , posY-1)){
-                this.legalMoves.push([posX+2, posY-1]);
-            }
-            if(this.checkRange(posX-2 , posY+1)){
-                this.legalMoves.push([posX-2, posY+1]);
-            }
-            if(this.checkRange(posX-2 , posY-1)){
-                this.legalMoves.push([posX-2, posY-1]);
-            }
-            if(this.checkRange(posX+1 , posY+2)){
-                this.legalMoves.push([posX+1, posY+2]);
-            }
-            if(this.checkRange(posX-1 , posY+2)){
-                this.legalMoves.push([posX-1, posY+2]);
-            }
-            if(this.checkRange(posX+1 , posY-2)){
-                this.legalMoves.push([posX+1, posY-2]);
-            }
-            if(this.checkRange(posX-1 , posY-2)){
-                this.legalMoves.push([posX-1, posY-2]);
-            }
+            // if(this.checkRange(posX+2 , posY+1)){
+            //     this.legalMoves.push([posX+2, posY+1]);
+            // }
+            // if(this.checkRange(posX+2 , posY-1)){
+            //     this.legalMoves.push([posX+2, posY-1]);
+            // }
+            // if(this.checkRange(posX-2 , posY+1)){
+            //     this.legalMoves.push([posX-2, posY+1]);
+            // }
+            // if(this.checkRange(posX-2 , posY-1)){
+            //     this.legalMoves.push([posX-2, posY-1]);
+            // }
+            // if(this.checkRange(posX+1 , posY+2)){
+            //     this.legalMoves.push([posX+1, posY+2]);
+            // }
+            // if(this.checkRange(posX-1 , posY+2)){
+            //     this.legalMoves.push([posX-1, posY+2]);
+            // }
+            // if(this.checkRange(posX+1 , posY-2)){
+            //     this.legalMoves.push([posX+1, posY-2]);
+            // }
+            // if(this.checkRange(posX-1 , posY-2)){
+            //     this.legalMoves.push([posX-1, posY-2]);
+            // }
         }
 
     returnLetter(){

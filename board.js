@@ -7,6 +7,8 @@ class Board{
         this.updateLegalMoves();
         this.isWhiteKingInCheck = false;
         this.isBlackKingInCheck = false;
+        this.whiteKingCheckmated = false;
+        this.blackKingCheckmated = false;
     }
 
     addWhitePiece(pc){
@@ -198,6 +200,44 @@ class Board{
             return true;
         }
         return false;
+    }
+
+    isWhiteKingCheckMated(){
+        if(!this.isWhiteKingInCheck){
+            return;
+        }
+
+        for(let i=0; i<this.whitePieces.length; ++i){
+            for(let j=0; j<this.whitePieces[i].legalMoves; ++j){
+                this.movePieceFromTo(this.whitePieces[i].matrixPosition.x, this.whitePieces[i].matrixPosition.y,
+                    this.whitePieces[i].legalMoves[j][0], this.whitePieces[i].legalMoves[j][1], true);
+                var newStatusOfCheck = this.updateIfWhiteKingInCheck();
+                if(newStatusOfCheck){
+                    this.whitePieces[i].legalMoves.splice(j,1);
+                }
+                this.movePieceFromTo(this.whitePieces[i].legalMoves[j][0], this.whitePieces[i].legalMoves[j][1],
+                    this.whitePieces[i].matrixPosition.x, this.whitePieces[i].matrixPosition.y, true);
+            }
+        }
+    }
+
+    isBlackKingCheckMated(){
+        if(!this.isBlackKingInCheck){
+            return;
+        }
+
+        for(let i=0; i<this.blackPieces.length; ++i){
+            for(let j=0; j<this.blackPieces[i].legalMoves; ++j){
+                this.movePieceFromTo(this.blackPieces[i].matrixPosition.x, this.blackPieces[i].matrixPosition.y,
+                    this.blackPieces[i].legalMoves[j][0], this.blackPieces[i].legalMoves[j][1], true);
+                var newStatusOfCheck = this.updateIfWhiteKingInCheck();
+                if(newStatusOfCheck){
+                    this.blackPieces[i].legalMoves.splice(j,1);
+                }
+                this.movePieceFromTo(this.blackPieces[i].legalMoves[j][0], this.blackPieces[i].legalMoves[j][1],
+                    this.blackPieces[i].matrixPosition.x, this.blackPieces[i].matrixPosition.y, true);
+            }
+        }
     }
 
     updateLegalMoves(){
@@ -487,7 +527,7 @@ class Board{
 
                 while(tmpX>=0 && tmpY>=0){
                     if(this.pieceAt(tmpX,tmpY)){
-                        if(!this.getPiece(tmpX,tmpY).isWhite){
+                        if(this.getPiece(tmpX,tmpY).isWhite){
                             break;
                         }
                         this.whitePieces[i].legalMoves.push([tmpX,tmpY]);
@@ -503,7 +543,7 @@ class Board{
                 tmpY = posY-1;
                 while(tmpX<=7 && tmpY>=0){
                     if(this.pieceAt(tmpX,tmpY)){
-                        if(!this.getPiece(tmpX,tmpY).isWhite){
+                        if(this.getPiece(tmpX,tmpY).isWhite){
                             break;
                         }
                         this.whitePieces[i].legalMoves.push([tmpX,tmpY]);
@@ -519,7 +559,7 @@ class Board{
                 tmpY = posY+1;
                 while(tmpX>=0 && tmpY<=7){
                     if(this.pieceAt(tmpX,tmpY)){
-                        if(!this.getPiece(tmpX,tmpY).isWhite){
+                        if(this.getPiece(tmpX,tmpY).isWhite){
                             break;
                         }
                         this.whitePieces[i].legalMoves.push([tmpX,tmpY]);
@@ -536,7 +576,7 @@ class Board{
                 tmpY = posY+1;
                 while(tmpX<=7 && tmpY<=7){
                     if(this.pieceAt(tmpX,tmpY)){
-                        if(!this.getPiece(tmpX,tmpY).isWhite){
+                        if(this.getPiece(tmpX,tmpY).isWhite){
                             break;
                         }
                         this.whitePieces[i].legalMoves.push([tmpX,tmpY]);

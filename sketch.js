@@ -79,6 +79,8 @@ function mouseClicked(){
         
         test.updateIfWhiteKingInCheck();
         test.updateIfBlackKingInCheck();
+        test.isBlackKingCheckmated();
+        test.isWhiteKingCheckmated();
         //currentTurnOfWhite = !currentTurnOfWhite;
         console.log(test.isBlackKingInCheck);
 
@@ -88,6 +90,8 @@ function mouseClicked(){
         computerMakeMove(test, movingPiece.isWhite);
         test.updateIfWhiteKingInCheck();
         test.updateIfBlackKingInCheck();
+        test.isBlackKingCheckmated();
+        test.isWhiteKingCheckmated();
 
         console.log(test.isBlackKingInCheck);
 
@@ -116,12 +120,16 @@ function mouseClicked(){
         test.updateLegalMoves();
         test.updateIfWhiteKingInCheck();
         test.updateIfBlackKingInCheck();
+        test.isBlackKingCheckmated();
+        test.isWhiteKingCheckmated();
 
         console.log(test.isBlackKingInCheck);
 
         computerMakeMove(test, movingPiece.isWhite);
         test.updateIfWhiteKingInCheck();
         test.updateIfBlackKingInCheck();
+        test.isBlackKingCheckmated();
+        test.isWhiteKingCheckmated();
 
         console.log(test.isBlackKingInCheck);
         //currentTurnOfWhite = !currentTurnOfWhite;
