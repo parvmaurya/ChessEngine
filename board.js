@@ -21,41 +21,41 @@ class Board{
 
     setupPieces(){
         this.whitePieces.push(new King(4,7,true));
-        this.whitePieces.push(new Bishop(2,7,true));
-        this.whitePieces.push(new Bishop(5,7,true));
-        this.whitePieces.push(new Rook(0,7,true));
-        this.whitePieces.push(new Rook(7,7,true));
+        // this.whitePieces.push(new Bishop(2,7,true));
+        // this.whitePieces.push(new Bishop(5,7,true));
+        // this.whitePieces.push(new Rook(0,7,true));
+        // this.whitePieces.push(new Rook(7,7,true));
         this.whitePieces.push(new Queen(3,7,true));
-        this.whitePieces.push(new Knight(1,7,true));
-        this.whitePieces.push(new Knight(6,7,true));
+        // this.whitePieces.push(new Knight(1,7,true));
+        // this.whitePieces.push(new Knight(6,7,true));
 
-        this.whitePieces.push(new Pawn(0,6,true));
-        this.whitePieces.push(new Pawn(1,6,true));
-        this.whitePieces.push(new Pawn(2,6,true));
-        this.whitePieces.push(new Pawn(3,6,true));
-        this.whitePieces.push(new Pawn(4,6,true));
-        this.whitePieces.push(new Pawn(5,6,true));
-        this.whitePieces.push(new Pawn(6,6,true));
-        this.whitePieces.push(new Pawn(7,6,true));
+        // this.whitePieces.push(new Pawn(0,6,true));
+        // this.whitePieces.push(new Pawn(1,6,true));
+        // this.whitePieces.push(new Pawn(2,6,true));
+        // this.whitePieces.push(new Pawn(3,6,true));
+        // this.whitePieces.push(new Pawn(4,6,true));
+        // this.whitePieces.push(new Pawn(5,6,true));
+        // this.whitePieces.push(new Pawn(6,6,true));
+        // this.whitePieces.push(new Pawn(7,6,true));
 
 
         this.blackPieces.push(new King(4,0,false));
-        this.blackPieces.push(new Bishop(2,0,false));
-        this.blackPieces.push(new Bishop(5,0,false));
-        this.blackPieces.push(new Rook(0,0,false));
-        this.blackPieces.push(new Rook(7,0,false));
-        this.blackPieces.push(new Queen(3,0,false));
-        this.blackPieces.push(new Knight(1,0,false));
-        this.blackPieces.push(new Knight(6,0,false));
+        //this.blackPieces.push(new Bishop(2,0,false));
+        //this.blackPieces.push(new Bishop(5,0,false));
+        //this.blackPieces.push(new Rook(0,0,false));
+        //this.blackPieces.push(new Rook(7,0,false));
+        //this.blackPieces.push(new Queen(3,0,false));
+        //this.blackPieces.push(new Knight(1,0,false));
+        //this.blackPieces.push(new Knight(6,0,false));
 
-        this.blackPieces.push(new Pawn(0,1,false));
-        this.blackPieces.push(new Pawn(1,1,false));
-        this.blackPieces.push(new Pawn(2,1,false));
-        this.blackPieces.push(new Pawn(3,1,false));
-        this.blackPieces.push(new Pawn(4,1,false));
-        this.blackPieces.push(new Pawn(5,1,false));
-        this.blackPieces.push(new Pawn(6,1,false));
-        this.blackPieces.push(new Pawn(7,1,false));
+        //this.blackPieces.push(new Pawn(0,1,false));
+        //this.blackPieces.push(new Pawn(1,1,false));
+        //this.blackPieces.push(new Pawn(2,1,false));
+        //this.blackPieces.push(new Pawn(3,1,false));
+        //this.blackPieces.push(new Pawn(4,1,false));
+        //this.blackPieces.push(new Pawn(5,1,false));
+        //this.blackPieces.push(new Pawn(6,1,false));
+        //this.blackPieces.push(new Pawn(7,1,false));
     }
 
     pieceAt(xpos,ypos){
@@ -207,8 +207,8 @@ class Board{
             return;
         }
 
-        for(let i=0; i<this.whitePieces.length; ++i){
-            for(let j=0; j<this.whitePieces[i].legalMoves; ++j){
+        for(let i=this.whitePieces.length-1; i>=0; --i){
+            for(let j=this.whitePieces[i].legalMoves.length-1; j>=0; --j){
                 this.movePieceFromTo(this.whitePieces[i].matrixPosition.x, this.whitePieces[i].matrixPosition.y,
                     this.whitePieces[i].legalMoves[j][0], this.whitePieces[i].legalMoves[j][1], true);
                 var newStatusOfCheck = this.updateIfWhiteKingInCheck();
@@ -225,17 +225,35 @@ class Board{
         if(!this.isBlackKingInCheck){
             return;
         }
-
-        for(let i=0; i<this.blackPieces.length; ++i){
-            for(let j=0; j<this.blackPieces[i].legalMoves; ++j){
-                this.movePieceFromTo(this.blackPieces[i].matrixPosition.x, this.blackPieces[i].matrixPosition.y,
-                    this.blackPieces[i].legalMoves[j][0], this.blackPieces[i].legalMoves[j][1], true);
-                var newStatusOfCheck = this.updateIfWhiteKingInCheck();
+        
+        for(let i=this.blackPieces.length-1; i>=0; --i){
+            for(let j=this.blackPieces[i].legalMoves.length-1; j>=0; --j){
+                //console.log("got here");
+                //console.log(this.blackPieces[i].legalMoves);
+                var originalPositionX = this.blackPieces[i].matrixPosition.x;
+                var originalPositionY = this.blackPieces[i].matrixPosition.y;
+                //console.log(this.blackPieces[i].legalMoves[j]);
+                var newPositionX = this.blackPieces[i].legalMoves[j][0];
+                var newPositionY = this.blackPieces[i].legalMoves[j][1];
+                
+                if(this.pieceAt(newPositionX, newPositionY)){
+                    var pc = this.getPiece(newPositionX, newPositionY);
+                    var posX = pc.matrixPosition.x;
+                    var posY = pc.matrixPosition.y;
+                    var ltr = pc.letter;
+                }
+                this.movePieceFromTo(originalPositionX, originalPositionY, newPositionX, newPositionY,
+                     false);
+                
+                this.updateIfBlackKingInCheck();
+                var newStatusOfCheck = this.isBlackKingInCheck;
                 if(newStatusOfCheck){
                     this.blackPieces[i].legalMoves.splice(j,1);
                 }
-                this.movePieceFromTo(this.blackPieces[i].legalMoves[j][0], this.blackPieces[i].legalMoves[j][1],
-                    this.blackPieces[i].matrixPosition.x, this.blackPieces[i].matrixPosition.y, true);
+                else{
+                    this.movePieceFromTo(newPositionX, newPositionY, originalPositionX, originalPositionY
+                        , false);
+                }
             }
         }
     }
@@ -246,6 +264,7 @@ class Board{
             if(this.whitePieces[i].letter == "K"){
                 var posX = this.whitePieces[i].matrixPosition.x;
                 var posY = this.whitePieces[i].matrixPosition.y;
+                this.whitePieces[i].legalMoves = [];
                 if(this.pieceAt(posX-1,posY-1) & this.boundryCheck(posX-1, posY-1)){
                     if(!this.getPiece(posX-1, posY-1).isWhite){
                         this.whitePieces[i].legalMoves.push([posX-1, posY-1]);
@@ -746,6 +765,7 @@ class Board{
 
         for(let i=0; i<this.blackPieces.length; ++i){
             if(this.blackPieces[i].letter == "K"){
+                this.blackPieces[i].legalMoves = [];
                 var posX = this.blackPieces[i].matrixPosition.x;
                 var posY = this.blackPieces[i].matrixPosition.y;
                 if(this.pieceAt(posX-1,posY-1) & this.boundryCheck(posX-1, posY-1)){
