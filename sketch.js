@@ -47,7 +47,7 @@ function drawshit(){
 
 function mouseClicked(){ 
     var tmp;
-    console.log(test.blackPieces[0].legalMoves);
+    //console.log(test.blackPieces[0].legalMoves);
     cellPosOfNowX = floor(mouseX/squareHeight);
     cellPosOfNowY = floor(mouseY/squareHeight);
     test.updateLegalMoves();
@@ -76,24 +76,28 @@ function mouseClicked(){
         
         test.movePieceFromTo(positionOfPieceToBeRemovedX, positionOfPieceToBeRemovedY,
           cellPosOfNowX, cellPosOfNowY, isWhiteOfPieceToBeRemoved);
+        test.updateLegalMoves();  
         
         test.updateIfWhiteKingInCheck();
         test.updateIfBlackKingInCheck();
         test.isBlackKingCheckMated();
         test.isWhiteKingCheckMated();
         //currentTurnOfWhite = !currentTurnOfWhite;
-        console.log(test.isBlackKingInCheck);
+        //console.log(test.isBlackKingInCheck);
 
 
-        test.updateLegalMoves();
+        
 
         computerMakeMove(test, movingPiece.isWhite);
+        test.updateLegalMoves();
         test.updateIfWhiteKingInCheck();
         test.updateIfBlackKingInCheck();
         test.isBlackKingCheckMated();
         test.isWhiteKingCheckMated();
 
-        console.log(test.isBlackKingInCheck);
+        
+
+        //console.log(test.isBlackKingInCheck);
 
         //currentTurnOfWhite = !currentTurnOfWhite;
       }
@@ -123,15 +127,19 @@ function mouseClicked(){
         test.isBlackKingCheckMated();
         test.isWhiteKingCheckMated();
 
-        console.log(test.isBlackKingInCheck);
+        //console.log(test.isBlackKingInCheck);
+
+        test.updateLegalMoves();
 
         computerMakeMove(test, movingPiece.isWhite);
+        test.updateLegalMoves();
         test.updateIfWhiteKingInCheck();
         test.updateIfBlackKingInCheck();
         test.isBlackKingCheckMated();
         test.isWhiteKingCheckMated();
 
-        console.log(test.isBlackKingInCheck);
+        
+        //console.log(test.isBlackKingInCheck);
         //currentTurnOfWhite = !currentTurnOfWhite;
       }
     }
