@@ -47,6 +47,7 @@ function drawshit(){
 
 function mouseClicked(){ 
     var tmp;
+    console.log(test.blackPieces[0].legalMoves.length);
     //console.log(test.blackPieces[0].legalMoves);
     cellPosOfNowX = floor(mouseX/squareHeight);
     cellPosOfNowY = floor(mouseY/squareHeight);
