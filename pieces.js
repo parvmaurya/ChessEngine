@@ -76,30 +76,6 @@ class King extends Piece{
     }
 
     findlegalMoves(){
-        // if(this.checkRange(this.matrixPosition.x-1, this.matrixPosition.y-1)){
-        //     this.legalMoves.push([this.matrixPosition.x-1,this.matrixPosition.y-1]);
-        // }
-        // if(this.checkRange(this.matrixPosition.x-1, this.matrixPosition.y)){
-        //     this.legalMoves.push([this.matrixPosition.x-1,this.matrixPosition.y]);
-        // }
-        // if(this.checkRange(this.matrixPosition.x-1, this.matrixPosition.y+1)){
-        //     this.legalMoves.push([this.matrixPosition.x-1,this.matrixPosition.y+1]);
-        // }
-        // if(this.checkRange(this.matrixPosition.x, this.matrixPosition.y-1)){
-        //     this.legalMoves.push([this.matrixPosition.x,this.matrixPosition.y-1]);
-        // }
-        // if(this.checkRange(this.matrixPosition.x, this.matrixPosition.y+1)){
-        //     this.legalMoves.push([this.matrixPosition.x,this.matrixPosition.y+1]);
-        // }
-        // if(this.checkRange(this.matrixPosition.x+1, this.matrixPosition.y-1)){
-        //     this.legalMoves.push([this.matrixPosition.x+1,this.matrixPosition.y-1]);
-        // }
-        // if(this.checkRange(this.matrixPosition.x+1, this.matrixPosition.y)){
-        //     this.legalMoves.push([this.matrixPosition.x+1,this.matrixPosition.y]);
-        // }
-        // if(this.checkRange(this.matrixPosition.x+1, this.matrixPosition.y+1)){
-        //     this.legalMoves.push([this.matrixPosition.x+1,this.matrixPosition.y+1]);
-        // }
     }
 
     setLegalMoveToMinus(x,y){
@@ -126,35 +102,6 @@ class Queen extends Piece{
     }
 
     findlegalMoves(){
-        // for(let i=1; i<8; ++i){
-        //     if(this.checkRange(this.matrixPosition.x+i, this.matrixPosition.y+i)){
-        //         this.legalMoves.push([this.matrixPosition.x+i, this.matrixPosition.y+i]);
-        //     }
-        //     if(this.checkRange(this.matrixPosition.x+i, this.matrixPosition.y-i)){
-        //         this.legalMoves.push([this.matrixPosition.x+i, this.matrixPosition.y-i]);
-        //     }
-        //     if(this.checkRange(this.matrixPosition.x-i, this.matrixPosition.y+i)){
-        //         this.legalMoves.push([this.matrixPosition.x-i, this.matrixPosition.y+i]);
-        //     }
-        //     if(this.checkRange(this.matrixPosition.x-i, this.matrixPosition.y-i)){
-        //         this.legalMoves.push([this.matrixPosition.x-i, this.matrixPosition.y-i]);
-        //     }
-        // }
-
-        // for(let i=1; i<8; ++i){
-        //     if(this.checkRange(this.matrixPosition.x+i, this.matrixPosition.y)){
-        //         this.legalMoves.push([this.matrixPosition.x+i, this.matrixPosition.y]);
-        //     }
-        //     if(this.checkRange(this.matrixPosition.x-i, this.matrixPosition.y)){
-        //         this.legalMoves.push([this.matrixPosition.x-i, this.matrixPosition.y]);
-        //     }
-        //     if(this.checkRange(this.matrixPosition.x, this.matrixPosition.y+i)){
-        //         this.legalMoves.push([this.matrixPosition.x, this.matrixPosition.y+i]);
-        //     }
-        //     if(this.checkRange(this.matrixPosition.x, this.matrixPosition.y-i)){
-        //         this.legalMoves.push([this.matrixPosition.x, this.matrixPosition.y-i]);
-        //     }
-        // }
 
     }
 
@@ -182,20 +129,6 @@ class Bishop extends Piece{
     }
 
     findlegalMoves(){
-        // for(let i=1; i<8; ++i){
-        //     if(this.checkRange(this.matrixPosition.x+i, this.matrixPosition.y+i)){
-        //         this.legalMoves.push([this.matrixPosition.x+i, this.matrixPosition.y+i]);
-        //     }
-        //     if(this.checkRange(this.matrixPosition.x+i, this.matrixPosition.y-i)){
-        //         this.legalMoves.push([this.matrixPosition.x+i, this.matrixPosition.y-i]);
-        //     }
-        //     if(this.checkRange(this.matrixPosition.x-i, this.matrixPosition.y+i)){
-        //         this.legalMoves.push([this.matrixPosition.x-i, this.matrixPosition.y+i]);
-        //     }
-        //     if(this.checkRange(this.matrixPosition.x-i, this.matrixPosition.y-i)){
-        //         this.legalMoves.push([this.matrixPosition.x-i, this.matrixPosition.y-i]);
-        //     }
-        // }
     }
 
     returnLetter(){
@@ -222,20 +155,6 @@ class Rook extends Piece{
     }
 
     findlegalMoves(){
-        //     for(let i=1; i<8; ++i){
-        //         if(this.checkRange(this.matrixPosition.x+i, this.matrixPosition.y)){
-        //             this.legalMoves.push([this.matrixPosition.x+i, this.matrixPosition.y]);
-        //         }
-        //         if(this.checkRange(this.matrixPosition.x-i, this.matrixPosition.y)){
-        //             this.legalMoves.push([this.matrixPosition.x-i, this.matrixPosition.y]);
-        //         }
-        //         if(this.checkRange(this.matrixPosition.x, this.matrixPosition.y+i)){
-        //             this.legalMoves.push([this.matrixPosition.x, this.matrixPosition.y+i]);
-        //         }
-        //         if(this.checkRange(this.matrixPosition.x, this.matrixPosition.y-i)){
-        //             this.legalMoves.push([this.matrixPosition.x, this.matrixPosition.y-i]);
-        //         }
-        // }
     }
 
     returnLetter(){
@@ -262,18 +181,6 @@ class Pawn extends Piece{
     }
 
     findlegalMoves(){
-        // if(this.isWhite & this.matrixPosition.y==6){
-        //     this.legalMoves.push([this.matrixPosition.x, this.matrixPosition.y-2]);
-        // }
-        // if(!this.isWhite & this.matrixPosition.y==1){
-        //     this.legalMoves.push([this.matrixPosition.x, this.matrixPosition.y+2]);
-        // }
-        // if(this.isWhite){
-        //     this.legalMoves.push([this.matrixPosition.x, this.matrixPosition.y-1]);
-        // }
-        // else{
-        //     this.legalMoves.push([this.matrixPosition.x, this.matrixPosition.y+1]);
-        // }
     }
 
     returnLetter(){
@@ -298,30 +205,6 @@ class Knight extends Piece{
         this.findlegalMoves();
     }
     findlegalMoves(){
-            // if(this.checkRange(posX+2 , posY+1)){
-            //     this.legalMoves.push([posX+2, posY+1]);
-            // }
-            // if(this.checkRange(posX+2 , posY-1)){
-            //     this.legalMoves.push([posX+2, posY-1]);
-            // }
-            // if(this.checkRange(posX-2 , posY+1)){
-            //     this.legalMoves.push([posX-2, posY+1]);
-            // }
-            // if(this.checkRange(posX-2 , posY-1)){
-            //     this.legalMoves.push([posX-2, posY-1]);
-            // }
-            // if(this.checkRange(posX+1 , posY+2)){
-            //     this.legalMoves.push([posX+1, posY+2]);
-            // }
-            // if(this.checkRange(posX-1 , posY+2)){
-            //     this.legalMoves.push([posX-1, posY+2]);
-            // }
-            // if(this.checkRange(posX+1 , posY-2)){
-            //     this.legalMoves.push([posX+1, posY-2]);
-            // }
-            // if(this.checkRange(posX-1 , posY-2)){
-            //     this.legalMoves.push([posX-1, posY-2]);
-            // }
         }
 
     returnLetter(){

@@ -14,12 +14,10 @@ function updateLegalMovesAfterBlackKingInCheck(currentPosition, indexOfPiece, in
         var pcY = currentPosition.blackPieces[i].matrixPosition.y;
         var pcB = Object.assign(Object.create(currentPosition.blackPieces[i]), currentPosition.blackPieces[i]);
         cpyBlackPieces.push(pcB);
-        console.log(pcB);
     }
     
     var currentX = currentPosition.blackPieces[indexOfPiece].matrixPosition.x;
     var currentY = currentPosition.blackPieces[indexOfPiece].matrixPosition.y;
-    console.log(currentPosition.blackPieces[indexOfPiece]);
     var newX = currentPosition.blackPieces[indexOfPiece].legalMoves[indexOfLegalMove][0];
     var newY = currentPosition.blackPieces[indexOfPiece].legalMoves[indexOfLegalMove][1];
     currentPosition.movePieceFromTo(currentX, currentY, newX, newY, false);
@@ -46,6 +44,46 @@ class Board{
         this.isBlackKingInCheck = false;
         this.whiteKingCheckmated = false;
         this.blackKingCheckmated = false;
+        this.score = 0;
+    }
+
+    pieceValueScore(){
+        var valPieces = 0;
+        for(let i=0; i<this.whitePieces.length; ++i){
+            if(this.whitePieces[i].letter=="Q"){
+                valPieces+=9;
+            }
+            else if(this.whitePieces[i].letter=="R"){
+                valPieces+=5;
+            }
+            else if(this.whitePieces[i].letter=="B"){
+                valPieces+=3;
+            }
+            else if(this.whitePieces[i].letter=="Kn"){
+                valPieces+=3;
+            }
+            else if(this.whitePieces[i].letter=="P"){
+                valPieces+=1;
+            }
+        }
+        for(let i =0; i<this.blackPieces.length; ++i){
+            if(this.blackPieces[i].letter=="Q"){
+                valPieces-=9;
+            }
+            else if(this.blackPieces[i].letter=="R"){
+                valPieces-=5;
+            }
+            else if(this.blackPieces[i].letter=="B"){
+                valPieces-=3;
+            }
+            else if(this.blackPieces[i].letter=="Kn"){
+                valPieces-=3;
+            }
+            else if(this.blackPieces[i].letter=="P"){
+                valPieces-=1;
+            }
+        }
+        this.score = valPieces;
     }
 
     addWhitePiece(pc){
@@ -96,7 +134,6 @@ class Board{
     }
 
     pieceAt(xpos,ypos){
-        //console.log(this.whitePieces.length);
         for(let i=0; i<this.whitePieces.length; ++i){
             if(this.whitePieces[i].matrixPosition.x==xpos &
                 this.whitePieces[i].matrixPosition.y==ypos){
@@ -113,13 +150,15 @@ class Board{
     }
 
     getPiece(x,y){
-        for(let i=0; i<this.whitePieces.length; ++i){
+        var whitePieceLen = this.whitePieces.length;
+        for(let i=0; i<whitePieceLen; ++i){
             if(this.whitePieces[i].matrixPosition.x==x &
                 this.whitePieces[i].matrixPosition.y==y){
                     return this.whitePieces[i];
                 }
         }
-        for(let i=0; i<this.blackPieces.length; ++i){
+        var blackPieceLen = this.blackPieces.length;
+        for(let i=0; i<blackPieceLen; ++i){
             if(this.blackPieces[i].matrixPosition.x==x &
                 this.blackPieces[i].matrixPosition.y==y){
                     return this.blackPieces[i];
@@ -239,21 +278,20 @@ class Board{
     }
 
     isWhiteKingCheckMated(){
-        if(!this.isWhiteKingInCheck){
-            return;
-        }
-
         for(let i=this.whitePieces.length-1; i>=0; --i){
             for(let j=this.whitePieces[i].legalMoves.length-1; j>=0; --j){
-                this.movePieceFromTo(this.whitePieces[i].matrixPosition.x, this.whitePieces[i].matrixPosition.y,
-                    this.whitePieces[i].legalMoves[j][0], this.whitePieces[i].legalMoves[j][1], true);
-                var newStatusOfCheck = this.updateIfWhiteKingInCheck();
-                if(newStatusOfCheck){
+                var isThisLegalMove = updateLegalMovesAfterBlackKingInCheck(this,i,j);
+                if(!isThisLegalMove){
                     this.whitePieces[i].legalMoves.splice(j,1);
                 }
-                this.movePieceFromTo(this.whitePieces[i].legalMoves[j][0], this.whitePieces[i].legalMoves[j][1],
-                    this.whitePieces[i].matrixPosition.x, this.whitePieces[i].matrixPosition.y, true);
             }
+        }
+        var mvCNT = 0;
+        for(let i=0; i<this.whitePieces.length; ++i){
+            mvCNT+=this.whitePieces[i].legalMoves.length;
+        }
+        if(mvCNT==0){
+            alert('Black Won');
         }
     }
 
@@ -266,22 +304,16 @@ class Board{
                 }
             }
         }
+        var mvCNT = 0;
+        for(let i=0; i<this.blackPieces.length; ++i){
+            mvCNT+=this.blackPieces[i].legalMoves.length;
+        }
+        if(mvCNT==0){
+            alert('White Won');
+        }
     }
 
     updateLegalMoves(){
-        //console.log("white move starts");
-        for(let i=0; i<this.whitePieces.length; ++i){
-            //console.log(this.whitePieces[i].letter);
-            //console.log(this.whitePieces[i].legalMoves);
-        }
-        //console.log("white move ends");
-
-        //console.log("black move starts");
-        for(let i=0; i<this.blackPieces.length; ++i){
-            //console.log(this.blackPieces[i].letter);
-            //console.log(this.blackPieces[i].legalMoves);
-        }
-        //console.log("black move ends");
         for(let i=0; i<this.whitePieces.length; ++i){
             if(this.whitePieces[i].letter == "K"){
                 var posX = this.whitePieces[i].matrixPosition.x;

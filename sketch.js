@@ -75,32 +75,18 @@ function mouseClicked(){
         test.movePieceFromTo(positionOfPieceToBeRemovedX, positionOfPieceToBeRemovedY,
           cellPosOfNowX, cellPosOfNowY, true);
         test.updateLegalMoves();  
-        
         test.updateIfWhiteKingInCheck();
         test.updateIfBlackKingInCheck();
         test.isBlackKingCheckMated();
-        // if(test.isBlackKingInCheck){
-        //   console.log(test.blackPieces);
-        // }
-        //test.isWhiteKingCheckMated();
-        //currentTurnOfWhite = !currentTurnOfWhite;
-        //console.log(test.isBlackKingInCheck);
-
 
         
-
+        
         computerMakeMove(test, movingPiece.isWhite);
         test.updateLegalMoves();
         test.updateIfWhiteKingInCheck();
         test.updateIfBlackKingInCheck();
         test.isBlackKingCheckMated();
-        //test.isWhiteKingCheckMated();
-
         
-
-        //console.log(test.isBlackKingInCheck);
-
-        //currentTurnOfWhite = !currentTurnOfWhite;
       }
     }
     else{
@@ -126,25 +112,14 @@ function mouseClicked(){
         test.updateIfWhiteKingInCheck();
         test.updateIfBlackKingInCheck();
         test.isBlackKingCheckMated();
-        //test.isWhiteKingCheckMated();
-
-        //console.log(test.isBlackKingInCheck);
-        // if(test.isBlackKingInCheck){
-        //   console.log(test.blackPieces);
-        //   console.log(test.isBlackKingInCheck);
-        //   breakpoint;
-        // }
+        
+        
 
         computerMakeMove(test, movingPiece.isWhite);
         test.updateLegalMoves();
         test.updateIfWhiteKingInCheck();
         test.updateIfBlackKingInCheck();
         test.isBlackKingCheckMated();
-        //test.isWhiteKingCheckMated();
-
-        
-        //console.log(test.isBlackKingInCheck);
-        //currentTurnOfWhite = !currentTurnOfWhite;
       }
     }
     drawshit();
