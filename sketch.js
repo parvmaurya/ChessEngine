@@ -47,8 +47,6 @@ function drawshit(){
 
 function mouseClicked(){ 
     var tmp;
-    console.log(test.blackPieces[0].legalMoves.length);
-    //console.log(test.blackPieces[0].legalMoves);
     cellPosOfNowX = floor(mouseX/squareHeight);
     cellPosOfNowY = floor(mouseY/squareHeight);
     test.updateLegalMoves();
@@ -63,7 +61,6 @@ function mouseClicked(){
         positionOfPieceToBeRemovedY = movingPiece.matrixPosition.y;
         isWhiteOfPieceToBeRemoved = movingPiece.isWhite;
         letterOfPieceToBeRemoved = movingPiece.letter;
-
         
         flag = false;
         for(i=0; i<movingPiece.legalMoves.length; ++i){
@@ -76,13 +73,16 @@ function mouseClicked(){
         }
         
         test.movePieceFromTo(positionOfPieceToBeRemovedX, positionOfPieceToBeRemovedY,
-          cellPosOfNowX, cellPosOfNowY, isWhiteOfPieceToBeRemoved);
+          cellPosOfNowX, cellPosOfNowY, true);
         test.updateLegalMoves();  
         
         test.updateIfWhiteKingInCheck();
         test.updateIfBlackKingInCheck();
         test.isBlackKingCheckMated();
-        test.isWhiteKingCheckMated();
+        // if(test.isBlackKingInCheck){
+        //   console.log(test.blackPieces);
+        // }
+        //test.isWhiteKingCheckMated();
         //currentTurnOfWhite = !currentTurnOfWhite;
         //console.log(test.isBlackKingInCheck);
 
@@ -94,7 +94,7 @@ function mouseClicked(){
         test.updateIfWhiteKingInCheck();
         test.updateIfBlackKingInCheck();
         test.isBlackKingCheckMated();
-        test.isWhiteKingCheckMated();
+        //test.isWhiteKingCheckMated();
 
         
 
@@ -126,18 +126,21 @@ function mouseClicked(){
         test.updateIfWhiteKingInCheck();
         test.updateIfBlackKingInCheck();
         test.isBlackKingCheckMated();
-        test.isWhiteKingCheckMated();
+        //test.isWhiteKingCheckMated();
 
         //console.log(test.isBlackKingInCheck);
-
-        test.updateLegalMoves();
+        // if(test.isBlackKingInCheck){
+        //   console.log(test.blackPieces);
+        //   console.log(test.isBlackKingInCheck);
+        //   breakpoint;
+        // }
 
         computerMakeMove(test, movingPiece.isWhite);
         test.updateLegalMoves();
         test.updateIfWhiteKingInCheck();
         test.updateIfBlackKingInCheck();
         test.isBlackKingCheckMated();
-        test.isWhiteKingCheckMated();
+        //test.isWhiteKingCheckMated();
 
         
         //console.log(test.isBlackKingInCheck);
