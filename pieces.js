@@ -6,7 +6,6 @@ class Piece{
 
         this.isWhite = isWhite;
         this.letter = letter;
-        this.moving = false;
     }
     show(){
         textSize(30);
