@@ -75,18 +75,18 @@ function mouseClicked(){
         test.movePieceFromTo(positionOfPieceToBeRemovedX, positionOfPieceToBeRemovedY,
           cellPosOfNowX, cellPosOfNowY, true);
         test.updateLegalMoves();  
+        test.isBlackKingCheckMated();
+        test.isWhiteKingCheckMated();
         test.updateIfWhiteKingInCheck();
         test.updateIfBlackKingInCheck();
-        test.isBlackKingCheckMated();
-
         
         
         computerMakeMove(test, movingPiece.isWhite);
         test.updateLegalMoves();
+        test.isBlackKingCheckMated();
+        test.isWhiteKingCheckMated();
         test.updateIfWhiteKingInCheck();
         test.updateIfBlackKingInCheck();
-        test.isBlackKingCheckMated();
-        
       }
     }
     else{
@@ -109,17 +109,19 @@ function mouseClicked(){
         test.movePieceFromTo(positionOfPieceToBeRemovedX, positionOfPieceToBeRemovedY,
           cellPosOfNowX, cellPosOfNowY, isWhiteOfPieceToBeRemoved);
         test.updateLegalMoves();
+        test.isBlackKingCheckMated();
+        test.isWhiteKingCheckMated();
         test.updateIfWhiteKingInCheck();
         test.updateIfBlackKingInCheck();
-        test.isBlackKingCheckMated();
         
         
 
         computerMakeMove(test, movingPiece.isWhite);
         test.updateLegalMoves();
+        test.isBlackKingCheckMated();
+        test.isWhiteKingCheckMated();
         test.updateIfWhiteKingInCheck();
         test.updateIfBlackKingInCheck();
-        test.isBlackKingCheckMated();
       }
     }
     drawshit();
