@@ -1,5 +1,4 @@
 function updateLegalMovesAfterWhiteKingInCheck(currentPosition, indexOfPiece, indexOfLegalMove){
-    console.log('Am I called');
     cpyWhitePieces = [];
     cpyBlackPieces = [];
     for(let i=0; i<currentPosition.whitePieces.length; ++i){
@@ -70,7 +69,93 @@ class Board{
         this.isBlackKingInCheck = false;
         this.whiteKingCheckmated = false;
         this.blackKingCheckmated = false;
+        this.positionInString = [["_", "_", "_", "_", "_", "_", "_", "_"],
+        ["_", "_", "_", "_", "_", "_", "_", "_"],
+        ["_", "_", "_", "_", "_", "_", "_", "_"],
+        ["_", "_", "_", "_", "_", "_", "_", "_"],
+        ["_", "_", "_", "_", "_", "_", "_", "_"],
+        ["_", "_", "_", "_", "_", "_", "_", "_"],
+        ["_", "_", "_", "_", "_", "_", "_", "_"],
+        ["_", "_", "_", "_", "_", "_", "_", "_"]];
         this.score = 0;
+    }
+    //["","","",""]
+    extractStringFromPosition(){
+        for(let i=0; i<this.whitePieces.length; ++i){
+            this.positionInString[this.whitePieces[i].matrixPosition.x][this.whitePieces[i].matrixPosition.y]
+            = (this.whitePieces[i].letter+"W");
+        }
+
+        for(let i=0; i<this.blackPieces.length; ++i){
+            this.positionInString[this.blackPieces[i].matrixPosition.x][this.blackPieces[i].matrixPosition.y]
+            = (this.blackPieces[i].letter+"B");
+        }
+    }
+
+    extractPositionFromPositionString(actualPosString){
+        var posString = [];
+        for(let i=0; i<actualPosString.length; ++i){
+            posString.push(actualPosString[i].slice());
+        }
+        // console.log(posString);
+        this.whitePieces = [];
+        this.blackPieces = [];
+        for(let i=0; i<posString.length; ++i){
+            for(let j=0; j<posString[i].length; ++j){
+                if(posString[i][j]!="_"){
+                    var isWhiteTempVariable = (posString[i][j].slice(-1)==='W')?true:false;
+                    posString[i][j] = posString[i][j].slice(0,-1);
+                    if(posString[i][j]=="K"){
+                        if(isWhiteTempVariable){
+                            this.whitePieces.push(new King(i,j,isWhiteTempVariable));
+                        }
+                        else{
+                            this.blackPieces.push(new King(i,j,isWhiteTempVariable));
+                        }
+                    }
+                    if(posString[i][j]=="Q"){
+                        if(isWhiteTempVariable){
+                            this.whitePieces.push(new Queen(i,j,isWhiteTempVariable));
+                        }
+                        else{
+                            this.blackPieces.push(new Queen(i,j,isWhiteTempVariable));
+                        }
+                    }
+                    if(posString[i][j]=="B"){
+                        if(isWhiteTempVariable){
+                            this.whitePieces.push(new Bishop(i,j,isWhiteTempVariable));
+                        }
+                        else{
+                            this.blackPieces.push(new Bishop(i,j,isWhiteTempVariable));
+                        }
+                    }
+                    if(posString[i][j]=="Kn"){
+                        if(isWhiteTempVariable){
+                            this.whitePieces.push(new Knight(i,j,isWhiteTempVariable));
+                        }
+                        else{
+                            this.blackPieces.push(new Knight(i,j,isWhiteTempVariable));
+                        }
+                    }
+                    if(posString[i][j]=="R"){
+                        if(isWhiteTempVariable){
+                            this.whitePieces.push(new Rook(i,j,isWhiteTempVariable));
+                        }
+                        else{
+                            this.blackPieces.push(new Rook(i,j,isWhiteTempVariable));
+                        }
+                    }
+                    if(posString[i][j]=="P"){
+                        if(isWhiteTempVariable){
+                            this.whitePieces.push(new Pawn(i,j,isWhiteTempVariable));
+                        }
+                        else{
+                            this.blackPieces.push(new Pawn(i,j,isWhiteTempVariable));
+                        }
+                    }
+                }
+            }
+        }
     }
 
     pieceValueScore(){
@@ -92,8 +177,8 @@ class Board{
                 valPieces+=1;
             }
         }
-        if(this.isWhiteKingCheckMated){
-            valPieces+=10000;
+        if(this.whiteKingCheckmated){
+            valPieces-=10000;
         }
         for(let i =0; i<this.blackPieces.length; ++i){
             if(this.blackPieces[i].letter=="Q"){
@@ -112,8 +197,8 @@ class Board{
                 valPieces-=1;
             }
         }
-        if(this.isBlackKingCheckMated){
-            valPieces-=10000;
+        if(this.blackKingCheckmated){
+            valPieces+=10000;
         }
         this.score = valPieces;
     }
@@ -160,9 +245,9 @@ class Board{
         // this.blackPieces.push(new Pawn(0,1,false));
         // this.blackPieces.push(new Pawn(1,1,false));
         // this.blackPieces.push(new Pawn(2,1,false));
-        // this.blackPieces.push(new Pawn(3,1,false));
-        // this.blackPieces.push(new Pawn(4,1,false));
-        // this.blackPieces.push(new Pawn(5,1,false));
+        this.blackPieces.push(new Pawn(3,1,false));
+        this.blackPieces.push(new Pawn(4,1,false));
+        this.blackPieces.push(new Pawn(5,1,false));
         // this.blackPieces.push(new Pawn(6,1,false));
         // this.blackPieces.push(new Pawn(7,1,false));
     }
@@ -292,6 +377,9 @@ class Board{
           }
           
         this.removePieceAt(x1,y1);
+        // console.log("piece removed is ");
+        // console.log(x1);
+        // console.log(y1);
 
         if(this.pieceAt(x2,y2)){
             this.removePieceAt(x2,y2);
@@ -324,8 +412,11 @@ class Board{
         for(let i=0; i<this.whitePieces.length; ++i){
             mvCNT+=this.whitePieces[i].legalMoves.length;
         }
-        if(mvCNT==0){
+        if(mvCNT==0 & this.isWhiteKingInCheck){
+            console.log(this);
             console.log('Black Won');
+            this.whiteKingCheckmated = true;
+            
             // alert('Black Won');
         }
     }
@@ -343,8 +434,9 @@ class Board{
         for(let i=0; i<this.blackPieces.length; ++i){
             mvCNT+=this.blackPieces[i].legalMoves.length;
         }
-        if(mvCNT==0){
+        if(mvCNT==0 & this.isBlackKingInCheck){
             // alert('White Won');
+            this.blackKingCheckmated = true;
             console.log('White Won');
         }
     }
