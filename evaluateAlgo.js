@@ -1,19 +1,40 @@
-function minimax(boardPosition, depth, isMax){
+function minimax(boardPositionString, depth, isMax){
     if(depth==0){
+        var str = [];
+        for(let i=0; i<boardPositionString.length; ++i){
+            str.push(boardPositionString[i].slice());
+        }
+        boardPosition = new Board();
+        boardPosition.extractPositionFromPositionString(str);
+        boardPosition.extractStringFromPosition();
+        boardPosition.updateLegalMoves();
+        boardPosition.isWhiteKingCheckMated();
+        boardPosition.isBlackKingCheckMated();
+        boardPosition.updateIfWhiteKingInCheck();
+        boardPosition.updateIfBlackKingInCheck();
+        boardPosition.didBlackWin();
+        boardPosition.didWhiteWin();
         boardPosition.pieceValueScore();
         return boardPosition.score;
     }
     if(isMax){
-        var whitePiecesTemp = [];
-        for(let i=0; i<boardPosition.whitePieces.length; ++i){
-            pc = Object.assign(Object.create(boardPosition.whitePieces[i]), boardPosition.whitePieces[i]);
-            whitePiecesTemp.push(pc);
+        var str = [];
+        for(let i=0; i<boardPositionString.length; ++i){
+            str.push(boardPositionString[i].slice());
         }
-
-        var blackPiecesTemp = [];
-        for(let i=0; i<boardPosition.blackPieces.length; ++i){
-            pc = Object.assign(Object.create(boardPosition.blackPieces[i]), boardPosition.blackPieces[i]);
-            blackPiecesTemp.push(pc);
+        boardPosition = new Board();
+        boardPosition.extractPositionFromPositionString(str);
+        boardPosition.extractStringFromPosition();
+        boardPosition.updateLegalMoves();
+        boardPosition.isWhiteKingCheckMated();
+        boardPosition.isBlackKingCheckMated();
+        boardPosition.updateIfWhiteKingInCheck();
+        boardPosition.updateIfBlackKingInCheck();
+        boardPosition.didBlackWin();
+        boardPosition.didWhiteWin();
+        var tempStorageOfPositionInsideMinMax = [];
+        for(let i=0; i<boardPosition.positionInString.length; ++i){
+            tempStorageOfPositionInsideMinMax.push(boardPosition.positionInString[i].slice());
         }
         var bestEval = Number.MIN_SAFE_INTEGER;
         var currentEvaluation;
@@ -30,25 +51,26 @@ function minimax(boardPosition, depth, isMax){
                 boardPosition.isBlackKingCheckMated();
                 boardPosition.updateIfWhiteKingInCheck();
                 boardPosition.updateIfBlackKingInCheck();
-
-                var currentEvaluation = minimax(boardPosition, depth-1, !isMax);
-                // console.log("--------------");
+                boardPosition.didBlackWin();
+                boardPosition.didWhiteWin();
+                boardPosition.extractStringFromPosition();
+                var sst = [];
+                for(let i=0; i<boardPosition.positionInString.length; ++i){
+                    sst.push(boardPosition.positionInString[i].slice());
+                }
+                //evaluate the position
                 // console.log(boardPosition);
-
-                // console.log(currentEvaluation);
-                // console.log("--------------");
-                boardPosition.blackPieces = [];
-                boardPosition.whitePieces = [];
-
-                for(let i=0; i<whitePiecesTemp.length; ++i){
-                    pc = Object.assign(Object.create(whitePiecesTemp[i]), whitePiecesTemp[i]);
-                    boardPosition.whitePieces.push(pc);
-                }
-
-                for(let i=0; i<blackPiecesTemp.length; ++i){
-                    pc = Object.assign(Object.create(blackPiecesTemp[i]), blackPiecesTemp[i]);
-                    boardPosition.blackPieces.push(pc);
-                }
+                currentEvaluation = minimax(sst, depth-1, !isMax);
+                //undo the move
+                boardPosition.extractPositionFromPositionString(tempStorageOfPositionInsideMinMax);
+                boardPosition.updateLegalMoves();
+                boardPosition.isWhiteKingCheckMated();
+                boardPosition.isBlackKingCheckMated();
+                boardPosition.updateIfWhiteKingInCheck();
+                boardPosition.updateIfBlackKingInCheck();
+                boardPosition.didBlackWin();
+                boardPosition.didWhiteWin();
+                boardPosition.extractStringFromPosition();
                 if(currentEvaluation>bestEval){
                     bestEval = currentEvaluation;
                 }
@@ -57,33 +79,85 @@ function minimax(boardPosition, depth, isMax){
         return bestEval;
     }
     else{
-        breakpoint;
+        var str = [];
+        for(let i=0; i<boardPositionString.length; ++i){
+            str.push(boardPositionString[i].slice());
+        }
+        boardPosition = new Board();
+        boardPosition.extractPositionFromPositionString(str);
+        boardPosition.extractStringFromPosition();
+        boardPosition.updateLegalMoves();
+        boardPosition.isWhiteKingCheckMated();
+        boardPosition.isBlackKingCheckMated();
+        boardPosition.updateIfWhiteKingInCheck();
+        boardPosition.updateIfBlackKingInCheck();
+        boardPosition.didBlackWin();
+        boardPosition.didWhiteWin();
+        var tempStorageOfPositionInsideMinMax = [];
+        for(let i=0; i<boardPosition.positionInString.length; ++i){
+            tempStorageOfPositionInsideMinMax.push(boardPosition.positionInString[i].slice());
+        }
+        var bestEval = Number.MAX_SAFE_INTEGER;
+        var currentEvaluation;
+        for(let k=0; k<boardPosition.whitePieces.length; ++k){
+            for(let l=0; l<boardPosition.whitePieces[k].legalMoves.length; ++l){
+                var fromX1 = boardPosition.whitePieces[k].matrixPosition.x;
+                var fromY1 = boardPosition.whitePieces[k].matrixPosition.y;
+                var toX1 = boardPosition.whitePieces[k].legalMoves[l][0];
+                var toY1 = boardPosition.whitePieces[k].legalMoves[l][1];
+                
+                boardPosition.movePieceFromTo(fromX1, fromY1, toX1, toY1,true);
+                boardPosition.updateLegalMoves();
+                boardPosition.isWhiteKingCheckMated();
+                boardPosition.isBlackKingCheckMated();
+                boardPosition.updateIfWhiteKingInCheck();
+                boardPosition.updateIfBlackKingInCheck();
+                boardPosition.didBlackWin();
+                boardPosition.didWhiteWin();
+                boardPosition.extractStringFromPosition();
+                var sst = [];
+                for(let i=0; i<boardPosition.positionInString.length; ++i){
+                    sst.push(boardPosition.positionInString[i].slice());
+                }
+                //evaluate the position
+                currentEvaluation = minimax(sst, depth-1, !isMax);
+                //undo the move
+                boardPosition.extractPositionFromPositionString(tempStorageOfPositionInsideMinMax);
+                boardPosition.updateLegalMoves();
+                boardPosition.isWhiteKingCheckMated();
+                boardPosition.isBlackKingCheckMated();
+                boardPosition.updateIfWhiteKingInCheck();
+                boardPosition.updateIfBlackKingInCheck();
+                boardPosition.didBlackWin();
+                boardPosition.didWhiteWin();
+                if(currentEvaluation<bestEval){
+                    bestEval = currentEvaluation;
+                }
+            }
+        }
+        return bestEval;
     }
 }
 
 function computerMakeMove(position, isItWhiteToMove){
     position.extractStringFromPosition();
-    console.log(position);
-    console.log(position.positionInString);
     position.extractPositionFromPositionString(position.positionInString);
-    console.log(position);
     position.updateLegalMoves();
     position.isWhiteKingCheckMated();
     position.isBlackKingCheckMated();
     position.updateIfWhiteKingInCheck();
     position.updateIfBlackKingInCheck();
-    position.isWhiteKingCheckMated();
-    position.isBlackKingCheckMated();
+    position.didWhiteWin();
+    position.didBlackWin();
     var identityOfBestMoveX;
     var identityOfBestMoveY;
     var bestValue = Number.MAX_SAFE_INTEGER;
     var val;
-
     var tempStorageOfPosition = [];
+    var st = [];
     for(let i=0; i<position.positionInString.length; ++i){
         tempStorageOfPosition.push(position.positionInString[i].slice());
     }
-    
     for(let i=0; i<position.blackPieces.length; ++i){
         for(let j=0; j<position.blackPieces[i].legalMoves.length; ++j){
             //make the move
@@ -97,13 +171,17 @@ function computerMakeMove(position, isItWhiteToMove){
             position.isBlackKingCheckMated();
             position.updateIfWhiteKingInCheck();
             position.updateIfBlackKingInCheck();
-            position.isWhiteKingCheckMated();
-            position.isBlackKingCheckMated();
+            position.didBlackWin();
+            position.didWhiteWin();
             
-
+            position.extractStringFromPosition();
+            st = [];
+            for(let i=0; i<position.positionInString.length; ++i){
+                st.push(position.positionInString[i].slice());
+            }
             //check the value
-            val = minimax(position, 0, true);
-            console.log(val);
+            val = minimax(st, 1, true);
+            // console.log(val);
             //undo the move
             
             position.extractPositionFromPositionString(tempStorageOfPosition);
@@ -112,11 +190,10 @@ function computerMakeMove(position, isItWhiteToMove){
             position.isBlackKingCheckMated();
             position.updateIfWhiteKingInCheck();
             position.updateIfBlackKingInCheck();
-            position.isWhiteKingCheckMated();
-            position.isBlackKingCheckMated();
-            // console.log(position.blackPieces);
-            // console.log(position.whitePieces);
+            position.didWhiteWin();
+            position.didBlackWin();
 
+            position.extractStringFromPosition();
             if(val<bestValue){
                 bestValue = val;
                 identityOfBestMoveX = i;
@@ -125,29 +202,17 @@ function computerMakeMove(position, isItWhiteToMove){
             
         }
     }
-    // console.log(blackPiecesTemp);
-    // console.log(position.positionInString);
+
     position.extractPositionFromPositionString(tempStorageOfPosition);
     position.updateLegalMoves();
     position.isWhiteKingCheckMated();
     position.isBlackKingCheckMated();
     position.updateIfWhiteKingInCheck();
     position.updateIfBlackKingInCheck();
-    position.isWhiteKingCheckMated();
-    position.isBlackKingCheckMated();
-    // console.log(position.positionInString);
-    // console.log(position.whitePieces);
-    // console.log(position.blackPieces);
-    // console.log(position);
-    console.log(position.blackPieces[identityOfBestMoveX].matrixPosition.x);
-    console.log(position.blackPieces[identityOfBestMoveX].matrixPosition.y);
-    console.log(position.blackPieces[identityOfBestMoveX].legalMoves[identityOfBestMoveY][0]);
-    console.log(position.blackPieces[identityOfBestMoveX].legalMoves[identityOfBestMoveY][1]);
     position.movePieceFromTo(position.blackPieces[identityOfBestMoveX].matrixPosition.x, 
         position.blackPieces[identityOfBestMoveX].matrixPosition.y,
         position.blackPieces[identityOfBestMoveX].legalMoves[identityOfBestMoveY][0], 
         position.blackPieces[identityOfBestMoveX].legalMoves[identityOfBestMoveY][1],false);
-    // console.log(position);
+
     // position.show();
-    // breakpoint;
 }

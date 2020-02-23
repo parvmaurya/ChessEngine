@@ -81,6 +81,14 @@ class Board{
     }
     //["","","",""]
     extractStringFromPosition(){
+        this.positionInString = [["_", "_", "_", "_", "_", "_", "_", "_"],
+        ["_", "_", "_", "_", "_", "_", "_", "_"],
+        ["_", "_", "_", "_", "_", "_", "_", "_"],
+        ["_", "_", "_", "_", "_", "_", "_", "_"],
+        ["_", "_", "_", "_", "_", "_", "_", "_"],
+        ["_", "_", "_", "_", "_", "_", "_", "_"],
+        ["_", "_", "_", "_", "_", "_", "_", "_"],
+        ["_", "_", "_", "_", "_", "_", "_", "_"]];
         for(let i=0; i<this.whitePieces.length; ++i){
             this.positionInString[this.whitePieces[i].matrixPosition.x][this.whitePieces[i].matrixPosition.y]
             = (this.whitePieces[i].letter+"W");
@@ -212,7 +220,7 @@ class Board{
     }
 
     setupPieces(){
-        this.whitePieces.push(new King(4,7,true));
+        this.whitePieces.push(new King(3,7,true));
         // this.whitePieces.push(new Bishop(2,7,true));
         this.whitePieces.push(new Queen(0,6,true));
         // this.whitePieces.push(new Bishop(5,7,true));
@@ -285,6 +293,23 @@ class Board{
         }
     }
 
+    getPieceIndex(){
+        var whitePieceLen = this.whitePieces.length;
+        for(let i=0; i<whitePieceLen; ++i){
+            if(this.whitePieces[i].matrixPosition.x==x &
+                this.whitePieces[i].matrixPosition.y==y){
+                    return i;
+                }
+        }
+        var blackPieceLen = this.blackPieces.length;
+        for(let i=0; i<blackPieceLen; ++i){
+            if(this.blackPieces[i].matrixPosition.x==x &
+                this.blackPieces[i].matrixPosition.y==y){
+                    i;
+                }
+        }
+    }
+
     updateIfWhiteKingInCheck(){
         this.isWhiteKingInCheck = false;
         var KingX, KingY;
@@ -353,7 +378,7 @@ class Board{
 
     movePieceFromTo(x1,y1,x2,y2, pieceMovedIs){
         const originalPiece = this.getPiece(x1,y1);
-        letterOfPieceToBeRemoved = originalPiece.letter;
+        var letterOfPieceToBeRemoved = originalPiece.letter;
 
         var pc;
 
@@ -377,9 +402,6 @@ class Board{
           }
           
         this.removePieceAt(x1,y1);
-        // console.log("piece removed is ");
-        // console.log(x1);
-        // console.log(y1);
 
         if(this.pieceAt(x2,y2)){
             this.removePieceAt(x2,y2);
@@ -398,6 +420,30 @@ class Board{
         }
         return false;
     }
+    
+    didBlackWin(){
+        this.whiteKingCheckmated = false;
+        var mvCNT = 0;
+        for(let i=0; i<this.whitePieces.length; ++i){
+            mvCNT+=this.whitePieces[i].legalMoves.length;
+        }
+        if(mvCNT==0 & this.isWhiteKingInCheck){
+            // console.log('Black Won');
+            this.whiteKingCheckmated = true;
+        }
+    }
+
+    didWhiteWin(){
+        this.blackKingCheckmated = false;
+        var mvCNT = 0;
+        for(let i=0; i<this.blackPieces.length; ++i){
+            mvCNT+=this.blackPieces[i].legalMoves.length;
+        }
+        if(mvCNT==0 & this.isBlackKingInCheck){
+            this.blackKingCheckmated = true;
+            // console.log('White Won');
+        }
+    }
 
     isWhiteKingCheckMated(){
         for(let i=this.whitePieces.length-1; i>=0; --i){
@@ -407,17 +453,6 @@ class Board{
                     this.whitePieces[i].legalMoves.splice(j,1);
                 }
             }
-        }
-        var mvCNT = 0;
-        for(let i=0; i<this.whitePieces.length; ++i){
-            mvCNT+=this.whitePieces[i].legalMoves.length;
-        }
-        if(mvCNT==0 & this.isWhiteKingInCheck){
-            console.log(this);
-            console.log('Black Won');
-            this.whiteKingCheckmated = true;
-            
-            // alert('Black Won');
         }
     }
 
@@ -429,15 +464,6 @@ class Board{
                     this.blackPieces[i].legalMoves.splice(j,1);
                 }
             }
-        }
-        var mvCNT = 0;
-        for(let i=0; i<this.blackPieces.length; ++i){
-            mvCNT+=this.blackPieces[i].legalMoves.length;
-        }
-        if(mvCNT==0 & this.isBlackKingInCheck){
-            // alert('White Won');
-            this.blackKingCheckmated = true;
-            console.log('White Won');
         }
     }
 

@@ -1,6 +1,7 @@
 var squareHeight = 60;
 var test;
 var movingPiece = -1;
+var movingPiecePos = [-1,-1];
 var currentTurnOfWhite = true;
 var isWhiteKingInCheck = false;
 var isBlackKingInCheck = false;
@@ -47,14 +48,19 @@ function drawshit(){
 
 function mouseClicked(){ 
     var tmp;
+    test.updateLegalMoves();  
+    test.isBlackKingCheckMated();
+    test.isWhiteKingCheckMated();
+    test.updateIfWhiteKingInCheck();
+    test.updateIfBlackKingInCheck();
     cellPosOfNowX = floor(mouseX/squareHeight);
     cellPosOfNowY = floor(mouseY/squareHeight);
-    test.updateLegalMoves();
 
     if( test.pieceAt(cellPosOfNowX, cellPosOfNowY) ){
       tmp = test.getPiece(cellPosOfNowX,cellPosOfNowY);
       if(tmp.isWhite){
-        movingPiece = test.getPiece(cellPosOfNowX,cellPosOfNowY);
+        movingPiecePos[0] = cellPosOfNowX;
+        movingPiecePos[1] = cellPosOfNowY;
       }
       else{
         positionOfPieceToBeRemovedX = movingPiece.matrixPosition.x;
@@ -79,7 +85,8 @@ function mouseClicked(){
         test.isWhiteKingCheckMated();
         test.updateIfWhiteKingInCheck();
         test.updateIfBlackKingInCheck();
-        
+        test.didWhiteWin();
+        test.didBlackWin();
         
         computerMakeMove(test, movingPiece.isWhite);
         test.updateLegalMoves();
@@ -87,10 +94,13 @@ function mouseClicked(){
         test.isWhiteKingCheckMated();
         test.updateIfWhiteKingInCheck();
         test.updateIfBlackKingInCheck();
+        test.didBlackWin();
+        test.didWhiteWin();
       }
     }
     else{
-      if(movingPiece!=-1){
+      if(movingPiecePos[0]!=-1){
+        movingPiece = test.getPiece(movingPiecePos[0],movingPiecePos[1]);
         positionOfPieceToBeRemovedX = movingPiece.matrixPosition.x;
         positionOfPieceToBeRemovedY = movingPiece.matrixPosition.y;
         isWhiteOfPieceToBeRemoved = movingPiece.isWhite;
@@ -106,14 +116,18 @@ function mouseClicked(){
           return;
         }
 
+        
+        
         test.movePieceFromTo(positionOfPieceToBeRemovedX, positionOfPieceToBeRemovedY,
           cellPosOfNowX, cellPosOfNowY, isWhiteOfPieceToBeRemoved);
+        
         test.updateLegalMoves();
         test.isBlackKingCheckMated();
         test.isWhiteKingCheckMated();
         test.updateIfWhiteKingInCheck();
         test.updateIfBlackKingInCheck();
-        
+        test.didBlackWin();
+        test.didWhiteWin();
         
 
         computerMakeMove(test, movingPiece.isWhite);
@@ -122,6 +136,8 @@ function mouseClicked(){
         test.isWhiteKingCheckMated();
         test.updateIfWhiteKingInCheck();
         test.updateIfBlackKingInCheck();
+        test.didBlackWin();
+        test.didWhiteWin();
       }
     }
     drawshit();
