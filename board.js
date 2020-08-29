@@ -1,63 +1,3 @@
-function updateLegalMovesAfterWhiteKingInCheck(currentPosition, indexOfPiece, indexOfLegalMove){
-    cpyWhitePieces = [];
-    cpyBlackPieces = [];
-    for(let i=0; i<currentPosition.whitePieces.length; ++i){
-        var pcW = Object.assign(Object.create(currentPosition.whitePieces[i]),currentPosition.whitePieces[i]);
-        cpyWhitePieces.push(pcW);
-    }
-    for(let i=0; i<currentPosition.blackPieces.length; ++i){
-        var pcB = Object.assign(Object.create(currentPosition.blackPieces[i]), currentPosition.blackPieces[i]);
-        cpyBlackPieces.push(pcB);
-    }
-    
-    var currentX = currentPosition.whitePieces[indexOfPiece].matrixPosition.x;
-    var currentY = currentPosition.whitePieces[indexOfPiece].matrixPosition.y;
-    var newX = currentPosition.whitePieces[indexOfPiece].legalMoves[indexOfLegalMove][0];
-    var newY = currentPosition.whitePieces[indexOfPiece].legalMoves[indexOfLegalMove][1];
-    currentPosition.movePieceFromTo(currentX, currentY, newX, newY, true);
-    currentPosition.updateLegalMoves();
-    currentPosition.updateIfBlackKingInCheck();
-    currentPosition.updateIfWhiteKingInCheck();
-    currentPosition.whitePieces = [];
-    currentPosition.blackPieces = [];
-    currentPosition.whitePieces = cpyWhitePieces;
-    currentPosition.blackPieces = cpyBlackPieces;
-    if(currentPosition.isWhiteKingInCheck){
-        return false;
-    }
-    return true;
-}
-
-function updateLegalMovesAfterBlackKingInCheck(currentPosition, indexOfPiece, indexOfLegalMove){
-    cpyWhitePieces = [];
-    cpyBlackPieces = [];
-    for(let i=0; i<currentPosition.whitePieces.length; ++i){
-        var pcW = Object.assign(Object.create(currentPosition.whitePieces[i]),currentPosition.whitePieces[i]);
-        cpyWhitePieces.push(pcW);
-    }
-    for(let i=0; i<currentPosition.blackPieces.length; ++i){
-        var pcB = Object.assign(Object.create(currentPosition.blackPieces[i]), currentPosition.blackPieces[i]);
-        cpyBlackPieces.push(pcB);
-    }
-    
-    var currentX = currentPosition.blackPieces[indexOfPiece].matrixPosition.x;
-    var currentY = currentPosition.blackPieces[indexOfPiece].matrixPosition.y;
-    var newX = currentPosition.blackPieces[indexOfPiece].legalMoves[indexOfLegalMove][0];
-    var newY = currentPosition.blackPieces[indexOfPiece].legalMoves[indexOfLegalMove][1];
-    currentPosition.movePieceFromTo(currentX, currentY, newX, newY, false);
-    currentPosition.updateLegalMoves();
-    currentPosition.updateIfBlackKingInCheck();
-    currentPosition.updateIfWhiteKingInCheck();
-    currentPosition.whitePieces = [];
-    currentPosition.blackPieces = [];
-    currentPosition.whitePieces = cpyWhitePieces;
-    currentPosition.blackPieces = cpyBlackPieces;
-    if(currentPosition.isBlackKingInCheck){
-        return false;
-    }
-    return true;
-}
-
 class Board{
     constructor(){
         this.whitePieces = [];
@@ -69,6 +9,18 @@ class Board{
         this.isBlackKingInCheck = false;
         this.whiteKingCheckmated = false;
         this.blackKingCheckmated = false;
+        this.piecePosition = {
+            "row1":{
+                "0":"0",
+                "1":"0",
+                "2":"0",
+                "3":"0",
+                "4":"0",
+                "5":"0",
+                "6":"0",
+                "7":"0"
+            }
+        }
         this.positionInString = [["_", "_", "_", "_", "_", "_", "_", "_"],
         ["_", "_", "_", "_", "_", "_", "_", "_"],
         ["_", "_", "_", "_", "_", "_", "_", "_"],
@@ -79,7 +31,6 @@ class Board{
         ["_", "_", "_", "_", "_", "_", "_", "_"]];
         this.score = 0;
     }
-    //["","","",""]
     extractStringFromPosition(){
         this.positionInString = [["_", "_", "_", "_", "_", "_", "_", "_"],
         ["_", "_", "_", "_", "_", "_", "_", "_"],
@@ -220,44 +171,42 @@ class Board{
     }
 
     setupPieces(){
-        this.whitePieces.push(new King(3,7,true));
-        // this.whitePieces.push(new Bishop(2,7,true));
-        this.whitePieces.push(new Queen(0,6,true));
-        // this.whitePieces.push(new Bishop(5,7,true));
-        // this.whitePieces.push(new Rook(0,7,true));
-        // this.whitePieces.push(new Rook(7,7,true));
-        // this.whitePieces.push(new Queen(3,7,true));
-        // this.whitePieces.push(new Knight(1,7,true));
-        // this.whitePieces.push(new Knight(6,7,true));
+        this.whitePieces.push(new King(4,7,true));
+        this.whitePieces.push(new Bishop(2,7,true));
+        this.whitePieces.push(new Bishop(5,7,true));
+        this.whitePieces.push(new Rook(0,7,true));
+        this.whitePieces.push(new Rook(7,7,true));
+        this.whitePieces.push(new Queen(3,7,true));
+        this.whitePieces.push(new Knight(1,7,true));
+        this.whitePieces.push(new Knight(6,7,true));
 
-        // this.whitePieces.push(new Pawn(0,6,true));
-        // this.whitePieces.push(new Pawn(1,6,true));
-        // this.whitePieces.push(new Pawn(2,6,true));
-        // this.whitePieces.push(new Pawn(3,6,true));
-        // this.whitePieces.push(new Pawn(4,6,true));
-        // this.whitePieces.push(new Pawn(5,6,true));
-        // this.whitePieces.push(new Pawn(6,6,true));
-        // this.whitePieces.push(new Pawn(7,6,true));
+        this.whitePieces.push(new Pawn(0,6,true));
+        this.whitePieces.push(new Pawn(1,6,true));
+        this.whitePieces.push(new Pawn(2,6,true));
+        this.whitePieces.push(new Pawn(3,6,true));
+        this.whitePieces.push(new Pawn(4,6,true));
+        this.whitePieces.push(new Pawn(5,6,true));
+        this.whitePieces.push(new Pawn(6,6,true));
+        this.whitePieces.push(new Pawn(7,6,true));
 
 
         this.blackPieces.push(new King(4,0,false));
-        // this.blackPieces.push(new Bishop(2,0,false));
-        this.blackPieces.push(new Queen(2,1,false));
-        // this.blackPieces.push(new Bishop(5,0,false));
-        // this.blackPieces.push(new Rook(0,0,false));
-        // this.blackPieces.push(new Rook(7,0,false));
-        // this.blackPieces.push(new Queen(3,0,false));
-        // this.blackPieces.push(new Knight(1,0,false));
-        // this.blackPieces.push(new Knight(6,0,false));
+        this.blackPieces.push(new Bishop(2,0,false));
+        this.blackPieces.push(new Bishop(5,0,false));
+        this.blackPieces.push(new Rook(0,0,false));
+        this.blackPieces.push(new Rook(7,0,false));
+        this.blackPieces.push(new Queen(3,0,false));
+        this.blackPieces.push(new Knight(1,0,false));
+        this.blackPieces.push(new Knight(6,0,false));
 
-        // this.blackPieces.push(new Pawn(0,1,false));
-        // this.blackPieces.push(new Pawn(1,1,false));
-        // this.blackPieces.push(new Pawn(2,1,false));
+        this.blackPieces.push(new Pawn(0,1,false));
+        this.blackPieces.push(new Pawn(1,1,false));
+        this.blackPieces.push(new Pawn(2,1,false));
         this.blackPieces.push(new Pawn(3,1,false));
         this.blackPieces.push(new Pawn(4,1,false));
         this.blackPieces.push(new Pawn(5,1,false));
-        // this.blackPieces.push(new Pawn(6,1,false));
-        // this.blackPieces.push(new Pawn(7,1,false));
+        this.blackPieces.push(new Pawn(6,1,false));
+        this.blackPieces.push(new Pawn(7,1,false));
     }
 
     pieceAt(xpos,ypos){
@@ -446,26 +395,83 @@ class Board{
     }
 
     isWhiteKingCheckMated(){
-        for(let i=this.whitePieces.length-1; i>=0; --i){
-            for(let j=this.whitePieces[i].legalMoves.length-1; j>=0; --j){
-                var isThisLegalMove = updateLegalMovesAfterWhiteKingInCheck(this,i,j);
-                if(!isThisLegalMove){
+        var tmpofpieces = [];
+        this.extractStringFromPosition();
+        for(let i=0; i<this.positionInString.length; ++i){
+            tmpofpieces.push(this.positionInString[i].slice());
+        }
+        var brd = new Board();
+        brd.extractPositionFromPositionString(tmpofpieces);
+        brd.extractStringFromPosition();
+        brd.updateLegalMoves();
+        brd.updateIfWhiteKingInCheck();
+        brd.updateIfBlackKingInCheck();
+        for(let i=brd.whitePieces.length-1; i>=0; --i){
+            for(let j=brd.whitePieces[i].legalMoves.length-1; j>=0; --j){
+                brd.extractPositionFromPositionString(tmpofpieces);
+                brd.extractStringFromPosition();
+                brd.updateLegalMoves();
+                brd.updateIfWhiteKingInCheck();
+                brd.movePieceFromTo(brd.whitePieces[i].matrixPosition.x,
+                    brd.whitePieces[i].matrixPosition.y,
+                    brd.whitePieces[i].legalMoves[j][0],
+                    brd.whitePieces[i].legalMoves[j][1], true);
+                brd.updateLegalMoves();
+                var isThisLegalMove = brd.isWhiteKingInCheck;
+                if(isThisLegalMove){
                     this.whitePieces[i].legalMoves.splice(j,1);
                 }
+                brd.extractPositionFromPositionString(tmpofpieces);
+                brd.extractStringFromPosition();
+                brd.updateLegalMoves();
             }
         }
     }
 
     isBlackKingCheckMated(){
-        for(let i=this.blackPieces.length-1; i>=0; --i){
-            for(let j=this.blackPieces[i].legalMoves.length-1; j>=0; --j){
-                var isThisLegalMove = updateLegalMovesAfterBlackKingInCheck(this,i,j);
-                if(!isThisLegalMove){
+        var tmpofpieces = [];
+        this.extractStringFromPosition();
+        for(let i=0; i<this.positionInString.length; ++i){
+            tmpofpieces.push(this.positionInString[i].slice());
+        }
+        var brd = new Board();
+        brd.extractPositionFromPositionString(tmpofpieces);
+        brd.extractStringFromPosition();
+        brd.updateLegalMoves();
+        brd.updateIfWhiteKingInCheck();
+        brd.updateIfBlackKingInCheck();
+        for(let i=brd.blackPieces.length-1; i>=0; --i){
+            for(let j=brd.blackPieces[i].legalMoves.length-1; j>=0; --j){
+                brd.extractPositionFromPositionString(tmpofpieces);
+                brd.updateLegalMoves();
+                brd.updateIfBlackKingInCheck();
+                brd.movePieceFromTo(brd.blackPieces[i].matrixPosition.x,
+                    brd.blackPieces[i].matrixPosition.y,
+                    brd.blackPieces[i].legalMoves[j][0],
+                    brd.blackPieces[i].legalMoves[j][1], true);
+                brd.updateLegalMoves();
+                brd.updateIfBlackKingInCheck();
+                brd.updateIfWhiteKingInCheck();
+                var isThisLegalMove = brd.isBlackKingInCheck;
+                if(isThisLegalMove){
                     this.blackPieces[i].legalMoves.splice(j,1);
                 }
+                brd.extractPositionFromPositionString(tmpofpieces);
+                brd.updateLegalMoves();
             }
         }
     }
+
+    // isBlackKingCheckMated(){
+    //     for(let i=this.blackPieces.length-1; i>=0; --i){
+    //         for(let j=this.blackPieces[i].legalMoves.length-1; j>=0; --j){
+    //             var isThisLegalMove = updateLegalMovesAfterBlackKingInCheck(this,i,j);
+    //             if(!isThisLegalMove){
+    //                 this.blackPieces[i].legalMoves.splice(j,1);
+    //             }
+    //         }
+    //     }
+    // }
 
     updateLegalMoves(){
         for(let i=0; i<this.whitePieces.length; ++i){

@@ -8,6 +8,7 @@ var isBlackKingInCheck = false;
 
 function setup() {
   createCanvas(500, 500);
+  frameRate(10);
   whiteKing = loadImage('https://upload.wikimedia.org/wikipedia/commons/3/3b/Chess_klt60.png');
   whiteQueen = loadImage('https://upload.wikimedia.org/wikipedia/commons/4/49/Chess_qlt60.png');
   whiteKnight = loadImage('https://upload.wikimedia.org/wikipedia/commons/2/28/Chess_nlt60.png');
@@ -128,7 +129,6 @@ function mouseClicked(){
         test.updateIfBlackKingInCheck();
         test.didBlackWin();
         test.didWhiteWin();
-        
 
         computerMakeMove(test, movingPiece.isWhite);
         test.updateLegalMoves();

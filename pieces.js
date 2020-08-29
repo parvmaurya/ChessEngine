@@ -68,26 +68,8 @@ class Piece{
 class King extends Piece{
     constructor(x,y,isWhite){
         super(x,y,isWhite);
-        this.letter = "K";
-        this.moving = false;   
+        this.letter = "K";  
         this.legalMoves = [];  
-        this.findlegalMoves();
-    }
-
-    findlegalMoves(){
-    }
-
-    setLegalMoveToMinus(x,y){
-        for(let i=0; i<this.legalMoves.length; ++i){
-            if(this.legalMoves[i][0] == x & this.legalMoves[i][1] == y){
-                this.legalMoves[i][0] = -1;
-                this.legalMoves[i][1] = -1;
-            }
-        }
-    }
-
-    returnLetter(){
-        return this.letter;
     }
 }
 
@@ -95,26 +77,7 @@ class Queen extends Piece{
     constructor(x,y,isWhite){
         super(x,y,isWhite);
         this.letter = "Q"; 
-        this.moving = false;  
         this.legalMoves = []; 
-        this.findlegalMoves();
-    }
-
-    findlegalMoves(){
-
-    }
-
-    removeLegalMove(x,y){
-        for(let i=0; i<this.legalMoves.length; ++i){
-            if(this.legalMoves[i][0] == x & this.legalMoves[i][1] == y){
-                this.legalMoves.splice(i,1);
-            }
-        }
-    }
-    
-
-    returnLetter(){
-        return this.letter;
     }
 }
 
@@ -123,75 +86,23 @@ class Bishop extends Piece{
         super(x,y,isWhite);
         this.letter = "B"; 
         this.moving = false;
-        this.legalMoves = [];
-        this.findlegalMoves();    
+        this.legalMoves = [];   
     }
-
-    findlegalMoves(){
-    }
-
-    returnLetter(){
-        return this.letter;
-    }
-
-    removeLegalMove(x,y){
-        for(let i=0; i<this.legalMoves.length; ++i){
-            if(this.legalMoves[i][0] == x & this.legalMoves[i][1] == y){
-                this.legalMoves.splice(i,1);
-            }
-        }
-    }
-
 }
 
 class Rook extends Piece{
     constructor(x,y,isWhite){
         super(x,y,isWhite);
         this.letter = "R";  
-        this.moving = false;
-        this.legalMoves = [];   
-        this.findlegalMoves();
+        this.legalMoves = [];  
     }
-
-    findlegalMoves(){
-    }
-
-    returnLetter(){
-        return this.letter;
-    }
-
-    removeLegalMove(x,y){
-        for(let i=0; i<this.legalMoves.length; ++i){
-            if(this.legalMoves[i][0] == x & this.legalMoves[i][1] == y){
-                this.legalMoves.splice(i,1);
-            }
-        }
-    }
-
 }
 
 class Pawn extends Piece{
     constructor(x,y,isWhite){
         super(x,y,isWhite);
         this.letter = "P";  
-        this.moving = false;
-        this.legalMoves = [];   
-        this.findlegalMoves();
-    }
-
-    findlegalMoves(){
-    }
-
-    returnLetter(){
-        return this.letter;
-    }
-
-    removeLegalMove(x,y){
-        for(let i=0; i<this.legalMoves.length; ++i){
-            if(this.legalMoves[i][0] == x & this.legalMoves[i][1] == y){
-                this.legalMoves.splice(i,1);
-            }
-        }
+        this.legalMoves = [];  
     }
 }
 
@@ -199,22 +110,6 @@ class Knight extends Piece{
     constructor(x,y,isWhite){
         super(x,y,isWhite);
         this.letter = "Kn"; 
-        this.moving = false;
         this.legalMoves = [];
-        this.findlegalMoves();
-    }
-    findlegalMoves(){
-        }
-
-    returnLetter(){
-        return this.letter;
-    }
-
-    removeLegalMove(x,y){
-        for(let i=0; i<this.legalMoves.length; ++i){
-            if(this.legalMoves[i][0] == x & this.legalMoves[i][1] == y){
-                this.legalMoves.splice(i,1);
-            }
-        }
     }
 }
